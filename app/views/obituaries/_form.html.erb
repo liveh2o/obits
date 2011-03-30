@@ -1,0 +1,53 @@
+<%= form_for(@obituary) do |f| %>
+  <% if @obituary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@obituary.errors.count, "error") %> prohibited this obituary from being saved:</h2>
+
+      <ul>
+      <% @obituary.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :middle_name %><br />
+    <%= f.text_field :middle_name %>
+  </div>
+  <div class="field">
+    <%= f.label :other_name %><br />
+    <%= f.text_field :other_name %>
+  </div>
+  <div class="field">
+    <%= f.label :obituary_printed_on %><br />
+    <%= f.date_select :obituary_printed_on %>
+  </div>
+  <div class="field">
+    <%= f.label :page %><br />
+    <%= f.text_field :page %>
+  </div>
+  <div class="field">
+    <%= f.label :born_on %><br />
+    <%= f.date_select :born_on %>
+  </div>
+  <div class="field">
+    <%= f.label :died_on %><br />
+    <%= f.date_select :died_on %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

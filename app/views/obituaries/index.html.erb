@@ -1,0 +1,39 @@
+<h1>Listing obituaries</h1>
+
+<table>
+  <tr>
+    <th>Last name</th>
+    <th>First name</th>
+    <th>Middle name</th>
+    <th>Other name</th>
+    <th>Obituary printed on</th>
+    <th>Page</th>
+    <th>Born on</th>
+    <th>Died on</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @obituaries.each do |obituary| %>
+  <tr>
+    <td><%= obituary.last_name %></td>
+    <td><%= obituary.first_name %></td>
+    <td><%= obituary.middle_name %></td>
+    <td><%= obituary.other_name %></td>
+    <td><%= obituary.obituary_printed_on %></td>
+    <td><%= obituary.page %></td>
+    <td><%= obituary.born_on %></td>
+    <td><%= obituary.died_on %></td>
+    <td><%= obituary.notes %></td>
+    <td><%= link_to 'Show', obituary %></td>
+    <td><%= link_to 'Edit', edit_obituary_path(obituary) %></td>
+    <td><%= link_to 'Destroy', obituary, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Obituary', new_obituary_path %>
