@@ -1,8 +1,11 @@
 require 'csv'
 
 class Obituary < ActiveRecord::Base
-  scope :clean, where(:dirty => false)
-  scope :dirty, where(:dirty => true)
+  default_scope :conditions => { :dirty => false }
+  
+  def self.dirty
+    with_exclusive_scope { where(:dirty => true) }
+  end
   
   def self.import
     data = CSV.read("#{Rails.root}/obits.csv")
@@ -28,13 +31,15 @@ class Obituary < ActiveRecord::Base
   end
   
   private
-    def self.sanitize_location(city=nil,state-nil,country=nil)
-      ''.tap do |s|
+    def self.sanitize_location(city=nil,state=nil,country=nil)
+      loc = ''.tap do |s|
         location = [city,state]
         location << country unless country.to_s.gsub(/\W/,'').match(/us/i)
         location = location.compact.join(', ')
         s << location unless location.blank?
       end
+
+      loc.blank? ? nil : loc
     end
   
     def self.sanitize_notes(fields={})
@@ -42,16 +47,20 @@ class Obituary < ActiveRecord::Base
         fields.reject {|key,value| value.blank? }.each do |key,val|
           a << case key
           when :birth_note
-            "born in #{val.strip}" unless birth_note.match(/u[kn|nk]/i)
+            "born in #{val.strip}" unless val.match(/u[kn|nk]/i)
           when :death_note
-            "died in #{val.strip}" unless death_note.match(/u[kn|nk]/i)
+            "died in #{val.strip}" unless val.match(/u[kn|nk]/i)
           when :infant
-            "infant"
+            "infant" if val == 1
+          when :location
+            val
           when :maiden_name
             "maiden name: #{val.strip}"
           end
         end
       end
-      notes.join("\n")
+      
+      notes = notes.compact.join("\n")
+      notes.blank? ? nil : notes
     end
 end
