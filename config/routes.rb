@@ -1,5 +1,5 @@
 Obits::Application.routes.draw do
-  resources :obituaries
+  resources :obituaries, :except => :show
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
