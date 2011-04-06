@@ -2,7 +2,7 @@ class ObituariesController < ApplicationController
   # GET /obituaries
   # GET /obituaries.xml
   def index
-    @obituaries = Obituary.limit(10)
+    @obituaries = Obituary.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

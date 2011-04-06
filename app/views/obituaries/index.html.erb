@@ -1,5 +1,7 @@
 <h1>Listing obituaries</h1>
 
+<%= paginate(@obituaries) %>
+
 <table>
   <tr>
     <th>Last name</th>
@@ -22,17 +24,19 @@
     <td><%= obituary.first_name %></td>
     <td><%= obituary.middle_name %></td>
     <td><%= obituary.other_name %></td>
-    <td><%= obituary.obituary_printed_on %></td>
+    <td><%= obituary.printed_on %></td>
     <td><%= obituary.page %></td>
     <td><%= obituary.born_on %></td>
     <td><%= obituary.died_on %></td>
-    <td><%= obituary.notes %></td>
+    <td><%= simple_format(obituary.notes) %></td>
     <td><%= link_to 'Show', obituary %></td>
     <td><%= link_to 'Edit', edit_obituary_path(obituary) %></td>
     <td><%= link_to 'Destroy', obituary, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
+
+<%= paginate(@obituaries) %>
 
 <br />
 
