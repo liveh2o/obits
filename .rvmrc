@@ -1,1 +1,7 @@
 rvm use ruby-1.9.2
+alias b="bundler"
+alias bi="b install --path vendor"
+alias be="b exec"
+alias bu="b update"
+alias rails="be rails"
+alias ruby="be ruby"
