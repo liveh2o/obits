@@ -2,14 +2,26 @@
 
 <%= paginate(@obituaries) %>
 
+<%= form_for @search do |f| %>
+    <div class="field">
+        <%= f.label :last_name %><br/>
+        <%= f.text_field :last_name_contains %>
+    </div>
+    <div class="field">
+        <%= f.label :first_name, 'First name (optional)' %><br/>
+        <%= f.text_field :first_name_contains %>
+    </div>
+    <%= f.submit 'Search' %>
+<% end %>
+
 <table>
   <tr>
     <th>Last name</th>
     <th>First name</th>
     <th>Middle name</th>
     <th>Other name</th>
-    <th>Obituary printed on</th>
-    <th>Page</th>
+    <th>Printed on</th>
+    <th>Page/Column</th>
     <th>Born on</th>
     <th>Died on</th>
     <th>Notes</th>
