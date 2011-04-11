@@ -1,6 +1,10 @@
 class ObituariesController < ApplicationController
   # GET /obituaries
   def index
+    if params[:search][:died_on_between].present?
+      @died_on_between = params[:search][:died_on_between]
+      params[:search][:died_on_between] = @died_on_between.split(",")
+    end
     @search = Obituary.search(params[:search])
     @obituaries = @search.page(params[:page])
   end
