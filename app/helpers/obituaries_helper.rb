@@ -20,7 +20,7 @@ module ObituariesHelper
     end
   end
 
-  def options_for_died_on(value)
+  def options_for_date_range(value)
     options = []
     decade = Date.today.year - Date.today.year % 10
     

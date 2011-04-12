@@ -1,0 +1,11 @@
+common: &common
+  min_prefix_len: 3
+
+development:
+  <<: *common
+
+test:
+  <<: *common
+
+production:
+  <<: *common

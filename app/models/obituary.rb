@@ -2,6 +2,17 @@ require 'csv'
 
 class Obituary < ActiveRecord::Base
   default_scope :conditions => { :dirty => false }
+
+  define_index do
+    # fields
+    indexes "CONCAT(first_name,' ',middle_name,' ',last_name)", :as => :full_name
+    indexes "CONCAT(first_name,' ',last_name)", :as => :name
+    indexes last_name
+    indexes first_name
+    indexes other_name
+    
+    has died_on
+  end
   
   def self.dirty
     with_exclusive_scope { where(:dirty => true) }

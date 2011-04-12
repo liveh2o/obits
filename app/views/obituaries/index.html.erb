@@ -1,20 +1,16 @@
-<%= form_for @search do |f| %>
+<%= form_tag("/obituaries",:method => :get) do %>
     <div class="field">
-        <%= f.label :last_name %><br/>
-        <%= f.text_field :last_name_contains %>
+        <%= label_tag :search %><br/>
+        <%= text_field_tag :search, params[:search] %>
     </div>
     <div class="field">
-        <%= f.label :first_name %><br/>
-        <%= f.text_field :first_name_contains %>
+        <%= label_tag :range, "Date range" %><br/>
+        <%= select_tag :range, options_for_date_range(params[:range]), :include_blank => true %>
     </div>
-    <div class="field">
-        <%= f.label :died_on_between, "Date range" %><br/>
-        <%= f.select :died_on_between, options_for_died_on(@died_on_between), :include_blank => true %>
-    </div>
-    <%= f.submit 'Search' %>
+    <%= submit_tag 'Search' %>
 <% end %>
 
-<h2 style="font-weight:normal;">Your search for <%= search_text(@search) %> matched <%= @obituaries.total_count %> records.</h2>
+<h2 style="font-weight:normal;">Your search for <%#= search_text(@search) %> matched <%#= @obituaries.total_count %> records.</h2>
 
 <%= paginate(@obituaries) %>
 
