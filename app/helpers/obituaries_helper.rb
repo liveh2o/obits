@@ -1,7 +1,7 @@
 module ObituariesHelper
 
   def decipher_date_range(range)
-    min, max = *range
+    min, max = range.first, range.last
     case
     when max.year > 2010
       content_tag(:strong,"after 2010")
@@ -9,14 +9,6 @@ module ObituariesHelper
       content_tag(:strong,"before 1930")
     else
       "from " + content_tag(:strong,"#{min.year}-#{max.year}")
-    end
-  end
-
-  def decipher_names(last_name,first_name)
-    [].tap do |a|
-      a << last_name if last_name.present?
-      a << first_name if first_name.present?
-      a.compact!
     end
   end
 
@@ -34,15 +26,12 @@ module ObituariesHelper
     options_for_select(options,value)
   end
 
-  def search_text(search)
-    text = ''.tap do |str|
-      str << content_tag(:strong) do
-        %("#{decipher_names(search.last_name_contains,search.first_name_contains).join(", ")}")
-      end
-      str << ' '
-      str << decipher_date_range(search.died_on_between) if search.died_on_between.present?
+  def search_text(search,range)
+    text = [].tap do |a|
+      a << content_tag(:strong,%("#{search}")) if search.present?
+      a << decipher_date_range(range) if range.present?
     end
-    text.html_safe
+    text.join(' ').html_safe
   end
 
 end

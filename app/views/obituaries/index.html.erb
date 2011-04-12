@@ -10,7 +10,7 @@
     <%= submit_tag 'Search' %>
 <% end %>
 
-<h2 style="font-weight:normal;">Your search for <%#= search_text(@search) %> matched <%#= @obituaries.total_count %> records.</h2>
+<h2 style="font-weight:normal;">Your search for <%= search_text(params[:search],@range) %> matched <%= @obituaries.search_count %> obituaries.</h2>
 
 <%= paginate(@obituaries) %>
 
@@ -49,7 +49,3 @@
 </table>
 
 <%= paginate(@obituaries) %>
-
-<br />
-
-<%= link_to 'New Obituary', new_obituary_path %>

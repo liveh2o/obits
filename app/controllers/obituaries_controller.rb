@@ -2,9 +2,8 @@ class ObituariesController < ApplicationController
   # GET /obituaries
   def index
     if params[:range].present?
-      range = params[:range].split(",")
-      range = Time.parse(range.first)..Time.parse(range.last)
-      logger.debug(range.inspect)
+      @range = params[:range].split(",")
+      @range = Time.parse(@range.first)..Time.parse(@range.last)
     end
     @obituaries = Obituary.search(params[:search],
       :star => true,
@@ -16,7 +15,7 @@ class ObituariesController < ApplicationController
         :first_name => 2
       },
       :with => {
-        :died_on => range
+        :died_on => @range
       }
       ).page(params[:page])
   end
