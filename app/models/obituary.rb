@@ -41,6 +41,15 @@ class Obituary < ActiveRecord::Base
     end
   end
   
+  def fullname
+    fullname ||= ''.tap do |str|
+      str << last_name
+      first_middle = [first_name,middle_name].compact.join(' ')
+      str << ", #{first_middle}" if first_middle.present?
+      str << " (#{other_name})" if other_name.present?
+    end
+  end
+  
   private
     def self.sanitize_location(city=nil,state=nil,country=nil)
       loc = ''.tap do |s|
@@ -64,7 +73,7 @@ class Obituary < ActiveRecord::Base
           when :infant
             "infant" if val == 1
           when :location
-            val
+            val.strip
           when :maiden_name
             "maiden name: #{val.strip}"
           end

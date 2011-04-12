@@ -1,51 +1,30 @@
-<%= form_tag("/obituaries",:method => :get) do %>
-    <div class="field">
-        <%= label_tag :search %><br/>
-        <%= text_field_tag :search, params[:search] %>
-    </div>
-    <div class="field">
-        <%= label_tag :range, "Date range" %><br/>
-        <%= select_tag :range, options_for_date_range(params[:range]), :include_blank => true %>
-    </div>
-    <%= submit_tag 'Search' %>
+<div id="form-wrapper">
+    <%= form_tag("/obituaries",:method => :get) do %>
+        <div id="name-wrapper" class="field">
+            <%= label_tag :search %><br/>
+            <%= text_field_tag :search, params[:search] %>
+        </div>
+        <div id="date-wrapper" class="field">
+            <%= label_tag :range, "Date range" %><br/>
+            <%= select_tag :range, options_for_date_range(params[:range]), :include_blank => true %>
+        </div>
+        <%= submit_tag 'Search', :id => 'submit' %>
+    <% end %>
+</div>
+<h2 id="match">Your search for <%= search_text(params[:search],@range) %> matched <%= @obituaries.search_count %> obituaries.</h2>
+<ul>
+<% @obituaries.compact.each do |obituary| %>
+    <li class="<%= cycle('odd','even') %>">
+        <strong><%= obituary.fullname %></strong><br/>
+        <div class="column results-left">
+            <strong>Born:</strong> <%= obituary.born_on %><br />
+            <strong>Deceased:</strong> <%= obituary.died_on %><br />
+            <strong>Obituary:</strong> <%= obituary.printed_on %>, <%= obituary.page %><br />
+        </div>
+        <div class="column results-right">
+            <em><%= simple_format(obituary.notes.strip) %></em>
+        </div>
+    </li>
 <% end %>
-
-<h2 style="font-weight:normal;">Your search for <%= search_text(params[:search],@range) %> matched <%= @obituaries.search_count %> obituaries.</h2>
-
-<%= paginate(@obituaries) %>
-
-<table>
-  <tr>
-    <th>Last name</th>
-    <th>First name</th>
-    <th>Middle name</th>
-    <th>Other name</th>
-    <th>Printed on</th>
-    <th>Page/Column</th>
-    <th>Born on</th>
-    <th>Died on</th>
-    <th>Notes</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @obituaries.each do |obituary| %>
-  <tr>
-    <td><%= obituary.last_name %></td>
-    <td><%= obituary.first_name %></td>
-    <td><%= obituary.middle_name %></td>
-    <td><%= obituary.other_name %></td>
-    <td><%= obituary.printed_on %></td>
-    <td><%= obituary.page %></td>
-    <td><%= obituary.born_on %></td>
-    <td><%= obituary.died_on %></td>
-    <td><%= simple_format(obituary.notes) %></td>
-    <td><%= link_to 'Show', obituary %></td>
-    <td><%= link_to 'Edit', edit_obituary_path(obituary) %></td>
-    <td><%= link_to 'Destroy', obituary, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
+</ul>
 <%= paginate(@obituaries) %>
