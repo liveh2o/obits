@@ -4,5 +4,4 @@ gem 'rails', '3.0.6'
 gem 'mysql2'
 
 gem 'kaminari'
-gem 'meta_search'
-gem 'meta_where'
+gem 'thinking-sphinx', '2.0.0', :require => 'thinking_sphinx'
