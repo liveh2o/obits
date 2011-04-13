@@ -1,0 +1,17 @@
+<li class="<%= cycle('odd','even') %>">
+    <strong><%= obituary.fullname %></strong><br/>
+    <div class="column results-left">
+        <strong>Born:</strong> <%= date_or_unknown(obituary.born_on) %><br />
+        <strong>Deceased:</strong> <%= date_or_unknown(obituary.died_on) %><br />
+        <strong>Obituary:</strong> <%= formatted_date(obituary.printed_on) %>, <%= obituary.page %><br />
+    </div>
+    <div class="column results-right">
+        <em><%= simple_format(obituary.notes.strip) %></em>
+    </div>
+    <% if admin? %>
+    <p>
+        <%= link_to "Edit", edit_admin_obituary_path(obituary) %>
+        <%= link_to image_tag('trash.gif'), [:admin, obituary], :confirm => 'Are you sure you want to delete this obituary?', :method => :delete %>
+    </p>
+    <% end %>
+</li>

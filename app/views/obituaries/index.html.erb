@@ -13,18 +13,6 @@
 </div>
 <h2 id="match">Your search for <%= search_text(params[:search],@range) %> matched <%= @obituaries.search_count %> obituaries.</h2>
 <ul>
-<% @obituaries.compact.each do |obituary| %>
-    <li class="<%= cycle('odd','even') %>">
-        <strong><%= obituary.fullname %></strong><br/>
-        <div class="column results-left">
-            <strong>Born:</strong> <%= obituary.born_on %><br />
-            <strong>Deceased:</strong> <%= obituary.died_on %><br />
-            <strong>Obituary:</strong> <%= obituary.printed_on %>, <%= obituary.page %><br />
-        </div>
-        <div class="column results-right">
-            <em><%= simple_format(obituary.notes.strip) %></em>
-        </div>
-    </li>
-<% end %>
+    <%= render :partial => 'obituary', :collection => @obituaries.compact %>
 </ul>
 <%= paginate(@obituaries) %>

@@ -1,5 +1,9 @@
 module ObituariesHelper
 
+  def date_or_unknown(date)
+    date.present? ? formatted_date(date) : content_tag(:em,'exact date not known')
+  end
+
   def decipher_date_range(range)
     min, max = range.first, range.last
     case
@@ -10,6 +14,10 @@ module ObituariesHelper
     else
       "from " + content_tag(:strong,"#{min.year}-#{max.year}")
     end
+  end
+
+  def formatted_date(date,format='%B %d, %Y')
+    date.strftime(format)
   end
 
   def options_for_date_range(value)
