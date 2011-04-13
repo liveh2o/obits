@@ -7,10 +7,6 @@ class Admin::ObituariesController < ApplicationController
     @obituaries = Obituary.search(params[:search],search_options).page(params[:page])
   end
 
-  def show
-    @obituary = Obituary.find(params[:id])
-  end
-
   def new
     @obituary = Obituary.new
   end
@@ -18,7 +14,7 @@ class Admin::ObituariesController < ApplicationController
   def create
     @obituary = Obituary.new(params[:obituary])
     if @obituary.save
-      redirect_to [:admin, @obituary], :notice => "Successfully created obituary."
+      redirect_to admin_obituaries_url, :notice => "Successfully created obituary."
     else
       render :action => 'new'
     end
@@ -31,7 +27,7 @@ class Admin::ObituariesController < ApplicationController
   def update
     @obituary = Obituary.find(params[:id])
     if @obituary.update_attributes(params[:obituary])
-      redirect_to [:admin, @obituary], :notice  => "Successfully updated obituary."
+      redirect_to admin_obituaries_url, :notice  => "Successfully updated obituary."
     else
       render :action => 'edit'
     end

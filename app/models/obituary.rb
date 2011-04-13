@@ -3,6 +3,8 @@ require 'csv'
 class Obituary < ActiveRecord::Base
   default_scope :conditions => { :dirty => false }
 
+  validates_presence_of :last_name, :printed_on
+
   define_index do
     # fields
     indexes "CONCAT(first_name,' ',middle_name,' ',last_name)", :as => :full_name
@@ -10,7 +12,8 @@ class Obituary < ActiveRecord::Base
     indexes last_name
     indexes first_name
     indexes other_name
-    
+
+    # attributes
     has died_on
   end
   

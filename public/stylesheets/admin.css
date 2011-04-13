@@ -16,6 +16,18 @@ form {
  display:block;
 }
 
+.field {
+  margin:15px 0;
+}
+.field input {
+  font-size:1.1em;
+  padding:3px 5px;
+}
+
+input.datepicker, #obituary_page {
+  width:150px;
+}
+
 ul {
   border-top:2px solid #ccc;
   margin-top:20px;
@@ -102,9 +114,6 @@ li>p {
   margin: 0;
 }
 
-.gray.awesome, .gray.awesome:visited { background-color: #ddd; color:#333; text-shadow: 0 1px 0 rgba(255,255,255,1); }
-.gray.awesome:hover { background-color: #ccc; }
-
 .awesome, .awesome:visited {
 	background: #222 url(/images/alert-overlay.png) repeat-x; 
 	border: none;
@@ -128,3 +137,6 @@ li>p {
 .awesome, .awesome:visited,
 .medium.awesome, .medium.awesome:visited 		{ font-size: 13px; font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
 .large.awesome, .large.awesome:visited 			{ font-size: 14px; padding: 8px 14px 9px; }
+
+.gray.awesome, .gray.awesome:visited { background-color: #ccc; color:#333; text-shadow: 0 1px 0 rgba(255,255,255,1); }
+.gray.awesome:hover { background-color: #aaa; color:#333; }
