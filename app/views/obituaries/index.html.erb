@@ -11,8 +11,10 @@
         <%= submit_tag 'Search', :id => 'submit' %>
     <% end %>
 </div>
+<% if params[:search].present? || @range.present? %>
 <h2 id="match">Your search for <%= search_text(params[:search],@range) %> matched <%= @obituaries.search_count %> obituaries.</h2>
 <ul>
     <%= render :partial => 'obituary', :collection => @obituaries.compact %>
 </ul>
 <%= paginate(@obituaries) %>
+<% end %>
