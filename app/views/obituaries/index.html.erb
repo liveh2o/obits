@@ -8,7 +8,7 @@
             <%= label_tag :range, "Date range" %><br/>
             <%= select_tag :range, options_for_date_range(params[:range]), :include_blank => true %>
         </div>
-        <%= submit_tag 'Search', :id => 'submit' %>
+        <%= submit_tag 'Search', :id => 'submit', :class => 'large awesome gray' %>
     <% end %>
 </div>
 <% if params[:search].present? || @range.present? %>
