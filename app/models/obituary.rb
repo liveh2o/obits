@@ -40,7 +40,7 @@ class Obituary < ActiveRecord::Base
       obit.dirty       = true if obit.last_name.blank? ||
         obit.printed_on.blank? || obit.page.blank?
 
-      obit.save!
+      obit.save(false)
     end
   end
   
