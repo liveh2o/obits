@@ -42,4 +42,7 @@ module ObituariesHelper
     text.join(' ').html_safe
   end
 
+  def sortable(title,sort=nil)
+    link_to title, {:search => params[:search],:range => params[:range],:sort => sort}
+  end
 end

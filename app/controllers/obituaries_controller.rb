@@ -6,6 +6,7 @@ class ObituariesController < ApplicationController
       @range = Time.parse(@range.first)..Time.parse(@range.last)
       with = { :died_on => @range }
     end
-    @obituaries = Obituary.search(params[:search],search_options(:with => with)).page(params[:page])
+    order = params[:sort] == 'name' ? 'last_name ASC, first_name ASC' : nil
+    @obituaries = Obituary.search(params[:search],search_options(:with => with, :order => order)).page(params[:page])
   end
 end

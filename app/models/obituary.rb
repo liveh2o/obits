@@ -9,8 +9,8 @@ class Obituary < ActiveRecord::Base
     # fields
     indexes "CONCAT(first_name,' ',middle_name,' ',last_name)", :as => :full_name
     indexes "CONCAT(first_name,' ',last_name)", :as => :name
-    indexes last_name
-    indexes first_name
+    indexes last_name, :sortable => true
+    indexes first_name, :sortable => true
     indexes other_name
 
     # attributes
