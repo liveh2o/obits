@@ -44,6 +44,14 @@ class Obituary < ActiveRecord::Base
     end
   end
   
+  def born_on=(value)
+    self[:born_on] = Chronic.parse(value).to_date unless value.blank?
+  end
+  
+  def died_on=(value)
+    self[:died_on] = Chronic.parse(value).to_date unless value.blank?
+  end
+  
   def fullname
     fullname ||= ''.tap do |str|
       str << last_name
@@ -51,6 +59,10 @@ class Obituary < ActiveRecord::Base
       str << ", #{first_middle}" if first_middle.present?
       str << " (#{other_name})" if other_name.present?
     end
+  end
+  
+  def printed_on=(value)
+    self[:printed_on] = Chronic.parse(value).to_date unless value.blank?
   end
   
   private
