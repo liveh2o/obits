@@ -15,6 +15,9 @@ class Obituary < ActiveRecord::Base
 
     # attributes
     has died_on
+
+    # properties
+    set_property :delta => true
   end
   
   def self.dirty
