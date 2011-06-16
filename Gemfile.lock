@@ -31,8 +31,10 @@ GEM
     arel (2.0.9)
     builder (2.1.2)
     chronic (0.3.0)
+    daemon_controller (0.2.6)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    fastthread (1.0.7)
     i18n (0.5.0)
     jquery-rails (0.2.7)
       rails (~> 3.0)
@@ -48,6 +50,11 @@ GEM
     mocha (0.9.12)
     mysql2 (0.2.7)
     nifty-generators (0.4.6)
+    passenger (3.0.7)
+      daemon_controller (>= 0.2.5)
+      fastthread (>= 1.0.1)
+      rack
+      rake (>= 0.8.1)
     polyglot (0.3.1)
     rack (1.2.2)
     rack-mount (0.6.14)
@@ -87,5 +94,6 @@ DEPENDENCIES
   mocha
   mysql2
   nifty-generators
+  passenger
   rails (= 3.0.7)
   thinking-sphinx (~> 2.0.3)

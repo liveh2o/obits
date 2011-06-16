@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'passenger', :group => :production
+
 gem 'rails', '3.0.7'
 gem 'mysql2'
 gem 'jquery-rails'
